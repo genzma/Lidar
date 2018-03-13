@@ -28,8 +28,9 @@ float TOF = 0;
 // Pin Definition
 
 const byte enablePin = 3;       //TDC_01
-const byte startPin = 4;        //TDC_03
-const byte stopPin = 7;         //TDC_04
+const byte laserStartPin = 4;        
+const byte tdcStartPin = 7;     //TDC_03
+const byte tdcStopPin = 5;      //TDC_04
 const byte triggerPin = 8;      //TDC_02
 const byte slaveSelectPin = 10; //TDC_11
 const byte interruptPin = 2;    // Pin 2 und 3 auf UNO für Interrupts
@@ -83,8 +84,7 @@ void loop() {
 
   // sende Start- (Stop-) Signal an TDC zur Zeitmessung
   noInterrupts();
-  pulsePin(startPin); // bisher nur für Pin 4 und 7 definiert
-  //pulsePin(stopPin);
+  pulsePin(); // bisher nur für Pin 4 und 7 definiert
   interrupts();
 
   delayMicroseconds(5);
@@ -153,6 +153,8 @@ void waitUntilTdcReady() {
   }
 }
 
+/*
+
 void pulsePin(byte pin) {
   
   cli () ;
@@ -173,6 +175,20 @@ void pulsePin(byte pin) {
   }
   sei () ;
 }
+
+*/
+
+void pulsePin() {
+  
+  cli () ;
+    PIND = B10010000;
+    __asm__("nop\n\tnop\n\tnop\n\tnop\n\tnop\n\t");
+    __asm__("nop\n\tnop\n\tnop\n\tnop\n\tnop\n\t");
+    __asm__("nop\n\tnop\n\tnop\n\tnop\n\tnop\n\t");
+    PIND = B10010000;
+  sei () ;
+}
+
 
 void computeTOF() {
   if (measurementMode == 1) {
