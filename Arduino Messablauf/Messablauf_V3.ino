@@ -52,10 +52,12 @@ void setup() {
   //Initialize Outputs
   pinMode(enablePin, OUTPUT);
   digitalWrite(enablePin, LOW);
-  pinMode(startPin, OUTPUT);
-  digitalWrite(startPin, LOW);
-  pinMode(stopPin, OUTPUT);
-  digitalWrite(stopPin, LOW);
+  pinMode(laserStartPin, OUTPUT);
+  digitalWrite(laserStartPin, HIGH);
+  pinMode(tdcStartPin, OUTPUT);
+  digitalWrite(tdcStartPin, LOW);
+  pinMode(tdcStopPin, OUTPUT);
+  digitalWrite(tdcStopPin, LOW);
   pinMode(slaveSelectPin, OUTPUT);
   digitalWrite(slaveSelectPin, HIGH);
   //Initialize INPUTS
